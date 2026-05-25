@@ -72,7 +72,7 @@
      </div>
 
      <div id="Tombol"><a id="By">&#128140; Selesai</a></div>
-     <p id="katatambahan" class="sembunyi">ndaaa jadii lahh wleee 😜</p>
+     <p id="katatambahan" class="sembunyi">nahh roti jhon🌭 😜</p>
      
      <div id="pesanditolak">
        <img id="stikerditolak" src="https://feeldreams.github.io/weee.gif"/>
@@ -101,9 +101,15 @@
   Content.style = "opacity:1;margin-top:16vh"; 
   const swals = Swal.mixin({allowOutsideClick: false, cancelButtonColor: '#FF0040', imageHeight: 80,}); 
 	
-  document.getElementById("kadoIn").onclick = function() {
+    document.getElementById("kadoIn").onclick = function() {
     if(fungsiAwal==0){
-      audio.play();
+      // Paksa mainkan lagu Brian Rahmattio terus secara direct
+      var mainAudio = document.getElementById("linkmp3");
+      mainAudio.src = "https://files.catbox.moe/gclskb.mp3";
+      mainAudio.play().catch(function(error) {
+         console.log("Autoplay blocked: " + error);
+      });
+      
       fungsiAwal=1;
       kadoIn.style="transition:all .8s ease;transform:scale(10);opacity:0";
       wallpaper.style="transform: scale(1.5);";
@@ -112,6 +118,7 @@
       setTimeout(inipesan, 500);
     }
   }
+
   
   async function inipesan(){
     var { value: nama } = await swals.fire({
@@ -136,7 +143,7 @@
     
   // Fungsi dipastikan hanya memunculkan notifikasi sukses tanpa pautan keluar
   async function menuju(){
-    await swals.fire('OK!', 'Thnyouu yaa shaa sudah klikk,sory lewat yak ! ❤️', 'success');
+    await swals.fire('OK!', 'Thnyouu yaa shaa sudah klikk,sory lewat sehari yak ! ❤️', 'success');
   }
 </script>
 
