@@ -101,7 +101,7 @@
   Content.style = "opacity:1;margin-top:16vh"; 
   const swals = Swal.mixin({allowOutsideClick: false, cancelButtonColor: '#FF0040', imageHeight: 80,}); 
 	
-    document.getElementById("kadoIn").onclick = function() {
+        document.getElementById("kadoIn").onclick = function() {
     if(fungsiAwal==0){
       // Paksa mainkan lagu Brian Rahmattio terus secara direct
       var mainAudio = document.getElementById("linkmp3");
@@ -119,22 +119,39 @@
     }
   }
 
+
+
   
-  async function inipesan(){
-    var { value: nama } = await swals.fire({
-       title: 'Masukin Nama Kamu', 
-       input: 'text',
-       inputValue: 'Shaaa'
+   async function inipesan(){
+    // Menanyakan sama ada ini Shaaa menggunakan butang Ya/Tidak
+    const { isConfirmed: apakahShaaa } = await swals.fire({
+       title: 'Ini Shaaa kah?', 
+       icon: 'question',
+       showCancelButton: true,
+       confirmButtonText: 'Ya',
+       cancelButtonText: 'Tidak'
     });
-    if(nama && nama.length < 11){
-      window.nama = nama;
-      vketikhalo="Hai, " + nama + " ✨";
+
+    if(apakahShaaa){
+      // Jika menekan YA, sistem terus berjalan menggunakan nama Shaaa
+      window.nama = "Shaaa";
+      vketikhalo = "Hai, Shaaa ✨";
       mulainama();
     } else {
-      await swals.fire('Ups!', 'Nama tidak boleh kosong atau lebih dari 10 karakter, ya!');
-      inipesan();
+      // Jika menekan TIDAK, keluar teks usikan lalu terus tutup/blank halaman
+      await swals.fire({
+         title: 'Ehhh bukan diaaa...',
+         text: 'Bfdy janganlah tekan link! 😡',
+         icon: 'error',
+         allowOutsideClick: false,
+         showConfirmButton: true,
+         confirmButtonText: 'Keluar'
+      });
+      // Mengosongkan skrin untuk tamatkan sesi terus
+      document.body.innerHTML = "<div style='color:white; text-align:center; margin-top:45vh; font-family:sans-serif; font-size:20px;'>Sesi Tamat.</div>";
     }
   }
+
 
   var tanya = 'Mau Hadiah kaa shaa ? 😶❤️';
   var opstanya = ' jawab Shaaa 😆';
